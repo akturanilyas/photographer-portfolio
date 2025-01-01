@@ -4,14 +4,14 @@ import ModernCarousel from '../components/home/ModernCarousel';
 
 export default function Home() {
   return (
-    <main className="flex flex-col w-full">
-      <div id="home">
+    <main className='flex flex-col w-full'>
+      <div id='home'>
         <HeroSection />
       </div>
-      <div id="portfolio">
+      <div id='portfolio'>
         <ModernCarousel />
       </div>
-      <div id="contact">
+      <div id='contact'>
         <ContactSection />
       </div>
     </main>

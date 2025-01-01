@@ -1,6 +1,7 @@
 'use client';
 
-import { Box, Container, Typography, ImageList, ImageListItem } from '@mui/material';
+import { Box, Container, ImageList, ImageListItem, Typography } from '@mui/material';
+import React from 'react';
 import Image from 'next/image';
 
 // Örnek fotoğraf verileri
@@ -47,10 +48,10 @@ function srcset(image: string, size: number, rows = 1, cols = 1) {
 export default function GallerySection() {
   return (
     <Box sx={{ py: 8, backgroundColor: '#f5f5f5' }}>
-      <Container maxWidth="lg">
+      <Container maxWidth='lg'>
         <Typography
-          variant="h2"
-          component="h2"
+          variant='h2'
+          component='h2'
           sx={{
             fontSize: { xs: '2rem', md: '3rem' },
             fontWeight: 700,
@@ -61,7 +62,7 @@ export default function GallerySection() {
           Portfolio
         </Typography>
         <Typography
-          variant="body1"
+          variant='body1'
           sx={{
             fontSize: { xs: '1rem', md: '1.2rem' },
             mb: 6,
@@ -71,9 +72,9 @@ export default function GallerySection() {
         >
           Discover the moments I've captured through my lens
         </Typography>
-        
+
         <ImageList
-          sx={{ 
+          sx={{
             width: '100%',
             height: 'auto',
             overflow: 'hidden',
@@ -82,18 +83,18 @@ export default function GallerySection() {
             gridTemplateColumns: {
               xs: 'repeat(1, 1fr)!important',
               sm: 'repeat(2, 1fr)!important',
-              md: 'repeat(3, 1fr)!important'
+              md: 'repeat(3, 1fr)!important',
             },
             gap: '16px!important',
           }}
-          variant="quilted"
+          variant='quilted'
           cols={4}
           rowHeight={200}
         >
-          {itemData.map((item) => (
-            <ImageListItem 
-              key={item.img} 
-              cols={item.cols || 1} 
+          {itemData.map(item => (
+            <ImageListItem
+              key={item.img}
+              cols={item.cols || 1}
               rows={item.rows || 1}
               sx={{
                 overflow: 'hidden',
@@ -106,10 +107,10 @@ export default function GallerySection() {
                 },
               }}
             >
-              <img
+              <Image
                 {...srcset(item.img, 200, item.rows, item.cols)}
                 alt={item.title}
-                loading="lazy"
+                loading='lazy'
                 style={{
                   width: '100%',
                   height: '100%',
@@ -133,7 +134,7 @@ export default function GallerySection() {
                   },
                 }}
               >
-                <Typography variant="subtitle1">{item.title}</Typography>
+                <Typography variant='subtitle1'>{item.title}</Typography>
               </Box>
             </ImageListItem>
           ))}

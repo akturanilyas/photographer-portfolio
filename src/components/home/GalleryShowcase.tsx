@@ -1,15 +1,14 @@
 'use client';
 
-import { Box, Container, Typography, ImageList, ImageListItem, Modal } from '@mui/material';
+import { Box, Container, ImageList, ImageListItem, Modal, Typography } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Autoplay, EffectCoverflow, Navigation, Pagination } from 'swiper/modules';
 import { useState } from 'react';
-
-// Swiper styles
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import Image from 'next/image';
 
 // Örnek fotoğraf verileri
 const photos = [
@@ -50,10 +49,10 @@ export default function GalleryShowcase() {
 
   return (
     <Box sx={{ py: 8, backgroundColor: '#f5f5f5' }}>
-      <Container maxWidth="lg">
+      <Container maxWidth='lg'>
         <Typography
-          variant="h2"
-          component="h2"
+          variant='h2'
+          component='h2'
           sx={{
             fontSize: { xs: '2rem', md: '3rem' },
             fontWeight: 700,
@@ -65,7 +64,9 @@ export default function GalleryShowcase() {
         </Typography>
 
         {/* 1. 3D Coverflow Carousel */}
-        <Typography variant="h4" sx={{ mb: 4, mt: 8 }}>1. 3D Coverflow Carousel</Typography>
+        <Typography variant='h4' sx={{ mb: 4, mt: 8 }}>
+          1. 3D Coverflow Carousel
+        </Typography>
         <Box
           sx={{
             '.swiper': {
@@ -108,16 +109,18 @@ export default function GalleryShowcase() {
             }}
             modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
           >
-            {photos.map((photo) => (
+            {photos.map(photo => (
               <SwiperSlide key={photo.id}>
-                <img src={photo.url} alt={photo.title} />
+                <Image width={300} height={400} src={photo.url} alt={photo.title} />
               </SwiperSlide>
             ))}
           </Swiper>
         </Box>
 
         {/* 2. Full Screen Grid with Modal */}
-        <Typography variant="h4" sx={{ mb: 4, mt: 8 }}>2. Grid with Modal View</Typography>
+        <Typography variant='h4' sx={{ mb: 4, mt: 8 }}>
+          2. Grid with Modal View
+        </Typography>
         <ImageList
           sx={{
             width: '100%',
@@ -127,7 +130,7 @@ export default function GalleryShowcase() {
           cols={3}
           rowHeight={300}
         >
-          {photos.map((item) => (
+          {photos.map(item => (
             <ImageListItem
               key={item.id}
               sx={{
@@ -139,10 +142,10 @@ export default function GalleryShowcase() {
               }}
               onClick={() => setSelectedImage(item.url)}
             >
-              <img
+              <Image
                 src={item.url}
                 alt={item.title}
-                loading="lazy"
+                loading='lazy'
                 style={{
                   width: '100%',
                   height: '100%',
@@ -155,18 +158,20 @@ export default function GalleryShowcase() {
         </ImageList>
 
         {/* 3. Masonry Layout */}
-        <Typography variant="h4" sx={{ mb: 4, mt: 8 }}>3. Masonry Layout</Typography>
+        <Typography variant='h4' sx={{ mb: 4, mt: 8 }}>
+          3. Masonry Layout
+        </Typography>
         <ImageList
           sx={{
             width: '100%',
             height: 'auto',
             gap: '16px!important',
           }}
-          variant="masonry"
+          variant='masonry'
           cols={3}
           gap={8}
         >
-          {photos.map((item) => (
+          {photos.map(item => (
             <ImageListItem
               key={item.id}
               sx={{
@@ -177,10 +182,11 @@ export default function GalleryShowcase() {
                 },
               }}
             >
-              <img
+              <Image
+
                 src={item.url}
                 alt={item.title}
-                loading="lazy"
+                loading='lazy'
                 style={{
                   transition: 'transform 0.3s ease',
                 }}
@@ -190,7 +196,9 @@ export default function GalleryShowcase() {
         </ImageList>
 
         {/* 4. Vertical Timeline */}
-        <Typography variant="h4" sx={{ mb: 4, mt: 8 }}>4. Vertical Timeline Gallery</Typography>
+        <Typography variant='h4' sx={{ mb: 4, mt: 8 }}>
+          4. Vertical Timeline Gallery
+        </Typography>
         <Box sx={{ position: 'relative', pl: { xs: 3, md: 5 } }}>
           {/* Timeline line */}
           <Box
@@ -203,8 +211,8 @@ export default function GalleryShowcase() {
               bgcolor: 'primary.main',
             }}
           />
-          
-          {photos.map((photo, index) => (
+
+          {photos.map((photo) => (
             <Box
               key={photo.id}
               sx={{
@@ -222,7 +230,7 @@ export default function GalleryShowcase() {
                 },
               }}
             >
-              <Typography variant="h6" sx={{ mb: 2 }}>
+              <Typography variant='h6' sx={{ mb: 2 }}>
                 {photo.title}
               </Typography>
               <Box
@@ -236,7 +244,7 @@ export default function GalleryShowcase() {
                   },
                 }}
               >
-                <img
+                <Image
                   src={photo.url}
                   alt={photo.title}
                   style={{
@@ -253,7 +261,7 @@ export default function GalleryShowcase() {
 
         {/* Modal for full-screen view */}
         <Modal
-          open={!!selectedImage}
+          open={Boolean(selectedImage)}
           onClose={() => setSelectedImage(null)}
           sx={{
             display: 'flex',
@@ -270,9 +278,9 @@ export default function GalleryShowcase() {
             onClick={() => setSelectedImage(null)}
           >
             {selectedImage && (
-              <img
+              <Image
                 src={selectedImage}
-                alt="Full size"
+                alt='Full size'
                 style={{
                   width: '100%',
                   height: '100%',

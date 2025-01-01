@@ -8,18 +8,21 @@ import { Box } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from '@/theme';
+import { ReactNode } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Professional Photography Services | Portfolio',
-  description: 'Capturing life\'s beautiful moments through professional photography. Specializing in portrait, landscape, and event photography in Istanbul, Turkey.',
-  keywords: 'photography, professional photographer, portrait photography, landscape photography, event photography, Istanbul photographer',
+  description:
+    'Capturing life\'s beautiful moments through professional photography. Specializing in portrait, landscape, and event photography in Istanbul, Turkey.',
+  keywords:
+    'photography, professional photographer, portrait photography, landscape photography, event photography, Istanbul photographer',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang='en' className='scroll-smooth'>
       <body className={inter.className}>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>

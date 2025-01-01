@@ -2,13 +2,14 @@
 
 import { Box, Container, Typography } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Autoplay, EffectCoverflow, Navigation, Pagination } from 'swiper/modules';
 
 // Swiper styles
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import Image from 'next/image';
 
 // Örnek fotoğraf verileri
 const photos = [
@@ -47,10 +48,10 @@ const photos = [
 export default function GalleryCarousel() {
   return (
     <Box sx={{ py: 8, backgroundColor: '#f5f5f5' }}>
-      <Container maxWidth="lg">
+      <Container maxWidth='lg'>
         <Typography
-          variant="h2"
-          component="h2"
+          variant='h2'
+          component='h2'
           sx={{
             fontSize: { xs: '2rem', md: '3rem' },
             fontWeight: 700,
@@ -61,7 +62,7 @@ export default function GalleryCarousel() {
           Portfolio
         </Typography>
         <Typography
-          variant="body1"
+          variant='body1'
           sx={{
             fontSize: { xs: '1rem', md: '1.2rem' },
             mb: 6,
@@ -120,10 +121,10 @@ export default function GalleryCarousel() {
             }}
             modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
           >
-            {photos.map((photo) => (
+            {photos.map(photo => (
               <SwiperSlide key={photo.id}>
                 <Box sx={{ position: 'relative', height: '100%' }}>
-                  <img src={photo.url} alt={photo.title} />
+                  <Image src={photo.url} alt={photo.title} />
                   <Box
                     sx={{
                       position: 'absolute',
@@ -135,10 +136,10 @@ export default function GalleryCarousel() {
                       p: 2,
                     }}
                   >
-                    <Typography variant="h6" sx={{ mb: 0.5 }}>
+                    <Typography variant='h6' sx={{ mb: 0.5 }}>
                       {photo.title}
                     </Typography>
-                    <Typography variant="body2">{photo.category}</Typography>
+                    <Typography variant='body2'>{photo.category}</Typography>
                   </Box>
                 </Box>
               </SwiperSlide>

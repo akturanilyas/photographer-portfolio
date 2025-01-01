@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Container, Grid, Typography, Link, IconButton, Divider } from '@mui/material';
+import { Box, Container, Divider, Grid, IconButton, Link, Typography } from '@mui/material';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -8,7 +8,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 export default function Footer() {
   return (
     <Box
-      component="footer"
+      component='footer'
       sx={{
         backgroundColor: '#000',
         color: 'white',
@@ -16,12 +16,12 @@ export default function Footer() {
         mt: 'auto',
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth='lg'>
         <Grid container spacing={4}>
           {/* Brand Section */}
           <Grid item xs={12} md={4}>
             <Typography
-              variant="h6"
+              variant='h6'
               sx={{
                 fontSize: '1.5rem',
                 fontWeight: 700,
@@ -35,7 +35,7 @@ export default function Footer() {
               PHOTOGRAPHER
             </Typography>
             <Typography
-              variant="body2"
+              variant='body2'
               sx={{
                 color: 'rgba(255,255,255,0.7)',
                 mb: 2,
@@ -48,14 +48,14 @@ export default function Footer() {
 
           {/* Quick Links */}
           <Grid item xs={12} sm={6} md={4}>
-            <Typography variant="h6" sx={{ mb: 2 }}>
+            <Typography variant='h6' sx={{ mb: 2 }}>
               Quick Links
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-              {['Home', 'Portfolio', 'Services', 'About', 'Contact'].map((link) => (
+              {['Home', 'Portfolio', 'Services', 'About', 'Contact'].map(link => (
                 <Link
                   key={link}
-                  href="#"
+                  href='#'
                   sx={{
                     color: 'rgba(255,255,255,0.7)',
                     textDecoration: 'none',
@@ -73,7 +73,7 @@ export default function Footer() {
 
           {/* Social Links */}
           <Grid item xs={12} sm={6} md={4}>
-            <Typography variant="h6" sx={{ mb: 2 }}>
+            <Typography variant='h6' sx={{ mb: 2 }}>
               Follow Us
             </Typography>
             <Box sx={{ display: 'flex', gap: 2 }}>
@@ -129,12 +129,12 @@ export default function Footer() {
             gap: 2,
           }}
         >
-          <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)' }}>
+          <Typography variant='body2' sx={{ color: 'rgba(255,255,255,0.7)' }}>
             © {new Date().getFullYear()} Photographer. All rights reserved.
           </Typography>
           <Box sx={{ display: 'flex', gap: 3 }}>
             <Link
-              href="#"
+              href='#'
               sx={{
                 color: 'rgba(255,255,255,0.7)',
                 textDecoration: 'none',
@@ -146,7 +146,7 @@ export default function Footer() {
               Privacy Policy
             </Link>
             <Link
-              href="#"
+              href='#'
               sx={{
                 color: 'rgba(255,255,255,0.7)',
                 textDecoration: 'none',

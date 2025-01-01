@@ -1,8 +1,8 @@
 'use client';
 
-import { Box, Container, Typography, IconButton, Modal, Fade } from '@mui/material';
+import { Box, Container, Fade, IconButton, Modal, Typography } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Autoplay, EffectCoverflow, Navigation, Pagination } from 'swiper/modules';
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -13,6 +13,7 @@ import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import Image from 'next/image';
 
 // Örnek fotoğraf verileri
 const photos = [
@@ -21,30 +22,40 @@ const photos = [
     url: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
     title: 'Wedding Photography',
     category: 'Wedding',
+    width: 1920,
+    height: 1080,
   },
   {
     id: 2,
     url: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
     title: 'Portrait Session',
     category: 'Portrait',
+    width: 1920,
+    height: 1080,
   },
   {
     id: 3,
     url: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
     title: 'Fashion Photography',
     category: 'Fashion',
+    width: 1920,
+    height: 1080,
   },
   {
     id: 4,
     url: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
     title: 'Landscape View',
     category: 'Landscape',
+    width: 1920,
+    height: 1080,
   },
   {
     id: 5,
     url: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8',
     title: 'Event Coverage',
     category: 'Event',
+    width: 1920,
+    height: 1080,
   },
 ];
 
@@ -53,21 +64,23 @@ export default function ModernCarousel() {
     url: string;
     title: string;
     category: string;
+    width: number;
+    height: number;
   }>(null);
 
   return (
-    <Box 
-      sx={{ 
+    <Box
+      sx={{
         py: { xs: 6, md: 12 },
         backgroundColor: '#000',
         color: 'white',
         overflow: 'hidden',
       }}
     >
-      <Container maxWidth="xl">
+      <Container maxWidth='xl'>
         <Box sx={{ textAlign: 'center', mb: { xs: 4, md: 8 } }}>
           <Typography
-            component="span"
+            component='span'
             sx={{
               fontSize: '1.2rem',
               color: 'primary.main',
@@ -80,7 +93,7 @@ export default function ModernCarousel() {
             Our Work
           </Typography>
           <Typography
-            variant="h2"
+            variant='h2'
             sx={{
               fontSize: { xs: '2.5rem', md: '3.5rem' },
               fontWeight: 700,
@@ -94,7 +107,7 @@ export default function ModernCarousel() {
             Featured Gallery
           </Typography>
           <Typography
-            variant="body1"
+            variant='body1'
             sx={{
               fontSize: { xs: '1rem', md: '1.2rem' },
               color: 'rgba(255,255,255,0.7)',
@@ -176,18 +189,18 @@ export default function ModernCarousel() {
           }}
         >
           <IconButton
-            className="custom-swiper-button prev"
-            sx={{ 
+            className='custom-swiper-button prev'
+            sx={{
               left: { xs: '10px', md: '40px' },
               color: 'white',
             }}
           >
             <ArrowBackIosIcon />
           </IconButton>
-          
+
           <IconButton
-            className="custom-swiper-button next"
-            sx={{ 
+            className='custom-swiper-button next'
+            sx={{
               right: { xs: '10px', md: '40px' },
               color: 'white',
             }}
@@ -223,13 +236,16 @@ export default function ModernCarousel() {
             }}
             modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
           >
-            {photos.map((photo) => (
-              <SwiperSlide 
-                key={photo.id}
-                onClick={() => setSelectedImage(photo)}
-              >
+            {photos.map(photo => (
+              <SwiperSlide key={photo.id} onClick={() => setSelectedImage(photo)}>
                 <Box sx={{ position: 'relative', height: '100%' }}>
-                  <img src={photo.url} alt={photo.title} />
+                  <Image
+                    src={photo.url}
+                    alt={photo.title}
+                    width={photo.width}
+                    height={photo.height}
+                    className='w-full h-full object-cover rounded-lg transition-transform duration-300 hover:scale-105'
+                  />
                   <Box
                     sx={{
                       position: 'absolute',
@@ -246,9 +262,9 @@ export default function ModernCarousel() {
                       },
                     }}
                   >
-                    <Typography 
-                      variant="h6" 
-                      sx={{ 
+                    <Typography
+                      variant='h6'
+                      sx={{
                         mb: 1,
                         fontSize: { xs: '1.2rem', md: '1.5rem' },
                         fontWeight: 600,
@@ -256,8 +272,8 @@ export default function ModernCarousel() {
                     >
                       {photo.title}
                     </Typography>
-                    <Typography 
-                      variant="body2"
+                    <Typography
+                      variant='body2'
                       sx={{
                         color: 'rgba(255,255,255,0.8)',
                         fontSize: { xs: '0.9rem', md: '1rem' },
@@ -274,12 +290,8 @@ export default function ModernCarousel() {
       </Container>
 
       {/* Modal for full-screen view */}
-      <Modal
-        open={!!selectedImage}
-        onClose={() => setSelectedImage(null)}
-        closeAfterTransition
-      >
-        <Fade in={!!selectedImage}>
+      <Modal open={Boolean(selectedImage)} onClose={() => setSelectedImage(null)} closeAfterTransition>
+        <Fade in={Boolean(selectedImage)}>
           <Box
             sx={{
               position: 'absolute',
@@ -316,9 +328,11 @@ export default function ModernCarousel() {
 
             {selectedImage && (
               <Box sx={{ position: 'relative', width: '100%', height: '100%' }}>
-                <img
+                <Image
                   src={selectedImage.url}
                   alt={selectedImage.title}
+                  width={selectedImage.width}
+                  height={selectedImage.height}
                   style={{
                     width: '100%',
                     height: '100%',
@@ -336,10 +350,10 @@ export default function ModernCarousel() {
                     p: 3,
                   }}
                 >
-                  <Typography variant="h5" sx={{ mb: 1 }}>
+                  <Typography variant='h5' sx={{ mb: 1 }}>
                     {selectedImage.title}
                   </Typography>
-                  <Typography variant="subtitle1" sx={{ color: 'rgba(255,255,255,0.8)' }}>
+                  <Typography variant='subtitle1' sx={{ color: 'rgba(255,255,255,0.8)' }}>
                     {selectedImage.category}
                   </Typography>
                 </Box>
