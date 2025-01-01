@@ -1,7 +1,8 @@
 'use client';
 
 import MenuIcon from '@mui/icons-material/Menu';
-import { useState } from 'react';
+import CloseIcon from '@mui/icons-material/Close';
+import { useState, useEffect } from 'react';
 
 const pages = [
   { name: 'Portfolio', href: '#portfolio' },
@@ -10,87 +11,101 @@ const pages = [
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const handleScroll = (href: string) => {
-    setIsMenuOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 border-b border-black/10">
+    <header 
+      className={`
+        fixed top-0 left-0 right-0 z-50 transition-all duration-300
+        ${isScrolled 
+          ? 'bg-black/80 backdrop-blur-md py-2' 
+          : 'bg-transparent py-4'
+        }
+      `}
+    >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between">
           {/* Logo - Desktop */}
-          <h1 
-            onClick={() => handleScroll('#home')}
-            className="hidden md:block text-xl font-bold cursor-pointer bg-gradient-primary bg-clip-text text-transparent"
+          <a 
+            href="#home"
+            className="hidden md:block text-2xl font-bold text-white hover:text-primary transition-colors duration-300"
           >
             PHOTOGRAPHER
-          </h1>
+          </a>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-md text-gray-700 hover:bg-gray-100"
-            >
-              <MenuIcon />
-            </button>
-          </div>
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden p-2 text-white hover:text-primary transition-colors duration-300"
+          >
+            <MenuIcon />
+          </button>
 
           {/* Logo - Mobile */}
-          <h1 
-            onClick={() => handleScroll('#home')}
-            className="md:hidden text-xl font-bold cursor-pointer bg-gradient-primary bg-clip-text text-transparent"
+          <a 
+            href="#home"
+            className="md:hidden text-xl font-bold text-white hover:text-primary transition-colors duration-300"
           >
             PHOTOGRAPHER
-          </h1>
+          </a>
 
           {/* Desktop menu */}
-          <nav className="hidden md:flex items-center space-x-4">
+          <nav className="hidden md:flex items-center space-x-2">
             {pages.map((page) => (
-              <button
+              <a
                 key={page.name}
-                onClick={() => handleScroll(page.href)}
-                className="px-4 py-2 text-gray-700 hover:bg-gradient-primary hover:bg-clip-text hover:text-transparent transition-colors duration-300"
+                href={page.href}
+                className="px-6 py-2 text-white hover:text-primary transition-colors duration-300 relative group"
               >
                 {page.name}
-              </button>
+                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+              </a>
             ))}
           </nav>
 
           {/* Mobile menu panel */}
-          <div className={`
-            md:hidden 
-            fixed inset-0 
-            bg-white 
-            transform transition-transform duration-300 ease-in-out
-            ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}
-          `}>
-            <div className="p-4">
-              <div className="flex items-center justify-between mb-8">
-                <h1 className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+          <div 
+            className={`
+              fixed inset-0 bg-black/95 backdrop-blur-md transition-all duration-500 md:hidden
+              ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}
+            `}
+          >
+            <div className="h-full flex flex-col">
+              <div className="flex items-center justify-between p-4">
+                <a 
+                  href="#home"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-xl font-bold text-white hover:text-primary transition-colors duration-300"
+                >
                   PHOTOGRAPHER
-                </h1>
+                </a>
                 <button
                   onClick={() => setIsMenuOpen(false)}
-                  className="p-2 rounded-md text-gray-700 hover:bg-gray-100"
+                  className="p-2 text-white hover:text-primary transition-colors duration-300"
                 >
-                  ✕
+                  <CloseIcon />
                 </button>
               </div>
-              <nav className="flex flex-col space-y-4">
+              
+              <nav className="flex-1 flex flex-col items-center justify-center space-y-8">
                 {pages.map((page) => (
-                  <button
+                  <a
                     key={page.name}
-                    onClick={() => handleScroll(page.href)}
-                    className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md text-left"
+                    href={page.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="text-3xl text-white hover:text-primary transition-colors duration-300"
                   >
                     {page.name}
-                  </button>
+                  </a>
                 ))}
               </nav>
             </div>
