@@ -6,7 +6,7 @@ export default function HeroSection() {
       {/* Background Image with Gradient Overlay */}
       <div className='absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70 z-10' />
       <Image
-        src='/hero-background.jpg'
+        src='/photographer/hero-background.jpg'
         alt='Professional Photography Background'
         fill
         priority
